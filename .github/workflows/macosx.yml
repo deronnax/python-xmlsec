@@ -1,5 +1,9 @@
 name: MacOS
-on: [push, pull_request]
+on:
+    push:
+        branches:
+            - main
+    pull_request:
 jobs:
   macosx:
     runs-on: macos-latest
@@ -16,6 +20,7 @@ jobs:
         run: |
           pip install --upgrade pip setuptools wheel build
           brew install libxml2 libxmlsec1 pkg-config
+          brew link --force libxml2 libxmlsec1
       - name: Build macosx_x86_64 wheel
         env:
           CC: clang
